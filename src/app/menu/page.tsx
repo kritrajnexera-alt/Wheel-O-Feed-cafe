@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import MenuCard from "@/components/MenuCard";
 
+const easeSpring = [0.32, 0.72, 0, 1] as const;
+
 const categories = [
   { id: "all", label: "All" },
   { id: "pizza", label: "Pizza & Garlic Breads" },
@@ -110,12 +112,14 @@ export default function MenuPage() {
       : menuItems.filter((item) => item.category === active);
 
   return (
-    <section className="min-h-dvh pt-24 sm:pt-28 pb-20">
+    <section className="min-h-dvh pt-24 sm:pt-28 pb-28 sm:pb-36">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: prefersReduced ? 0 : 0.6 }}
+          initial={
+            prefersReduced ? {} : { opacity: 0, y: 20, filter: "blur(4px)" }
+          }
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          transition={{ duration: 0.8, ease: easeSpring }}
           className="text-center mb-10 sm:mb-14"
         >
           <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-cream">
@@ -127,13 +131,12 @@ export default function MenuPage() {
           </p>
         </motion.div>
 
-        {/* Category Tabs */}
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActive(cat.id)}
-              className={`font-body text-sm tracking-wide px-4 py-2.5 rounded-full border transition-all duration-300 ${
+              className={`font-body text-sm tracking-wide px-4 py-2.5 rounded-full border transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${
                 active === cat.id
                   ? "bg-amber text-espresso border-amber font-semibold"
                   : "bg-transparent text-cream/60 border-amber/20 hover:text-amber hover:border-amber/40"
@@ -144,14 +147,15 @@ export default function MenuPage() {
           ))}
         </div>
 
-        {/* Menu Grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={active}
-            initial={prefersReduced ? {} : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={
+              prefersReduced ? {} : { opacity: 0, y: 10, filter: "blur(4px)" }
+            }
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={prefersReduced ? {} : { opacity: 0, y: -10 }}
-            transition={{ duration: prefersReduced ? 0 : 0.3 }}
+            transition={{ duration: 0.5, ease: easeSpring }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
           >
             {filtered.map((item, i) => (
