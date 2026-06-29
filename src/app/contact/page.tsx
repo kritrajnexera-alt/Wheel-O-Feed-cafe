@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 
 const details = [
   {
@@ -26,6 +27,32 @@ const details = [
     href: "https://instagram.com/wheel_o_feed",
   },
 ];
+
+function SafeImage({
+  src,
+  alt,
+  sizes,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  return failed ? (
+    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-espresso to-charcoal">
+      <span className="text-6xl">🗺️</span>
+    </div>
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover"
+      sizes={sizes}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export default function ContactPage() {
   const prefersReduced = useReducedMotion();
@@ -114,11 +141,9 @@ export default function ContactPage() {
             transition={{ duration: prefersReduced ? 0 : 0.6, delay: prefersReduced ? 0 : 0.2 }}
             className="relative bg-charcoal border border-amber/10 rounded-2xl overflow-hidden min-h-[400px]"
           >
-            <Image
+            <SafeImage
               src="/images/cafe-interior.jpg"
               alt="Wheel O Feed cafe interior at Ganesh Plaza, GIDC, Ankleshwar"
-              fill
-              className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/40 to-transparent flex items-end">

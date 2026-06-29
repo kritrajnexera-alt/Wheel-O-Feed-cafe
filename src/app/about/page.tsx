@@ -2,6 +2,31 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
+
+function SafeImage({
+  src,
+  alt,
+  sizes,
+  background,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+  background?: boolean;
+}) {
+  const [failed, setFailed] = useState(false);
+  return failed ? null : (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className={`object-cover ${background ? "opacity-30" : ""}`}
+      sizes={sizes}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 export default function AboutPage() {
   const prefersReduced = useReducedMotion();
@@ -15,12 +40,10 @@ export default function AboutPage() {
           transition={{ duration: prefersReduced ? 0 : 0.6 }}
         >
           <div className="text-center mb-14 sm:mb-16">
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-amber/20">
-              <Image
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-amber/20 bg-espresso-light">
+              <SafeImage
                 src="/images/coffee-beans.jpg"
                 alt="Coffee beans"
-                fill
-                className="object-cover"
                 sizes="96px"
               />
             </div>
@@ -61,13 +84,11 @@ export default function AboutPage() {
                 whileInView={prefersReduced ? {} : { opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.15 }}
-                className="relative aspect-square rounded-2xl overflow-hidden border border-amber/10"
+                className="relative aspect-square rounded-2xl overflow-hidden border border-amber/10 bg-espresso"
               >
-                <Image
+                <SafeImage
                   src="/images/espresso-2.jpg"
                   alt="Professional espresso machine at Wheel O Feed"
-                  fill
-                  className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 to-transparent flex items-end p-6">
@@ -86,12 +107,11 @@ export default function AboutPage() {
               className="relative bg-charcoal/60 border border-amber/10 rounded-2xl overflow-hidden min-h-[300px] flex items-center"
             >
               <div className="absolute inset-0">
-                <Image
+                <SafeImage
                   src="/images/espresso-1.jpg"
                   alt="Coffee at Wheel O Feed"
-                  fill
-                  className="object-cover opacity-30"
                   sizes="100vw"
+                  background
                 />
               </div>
               <div className="relative p-8 sm:p-10 text-center w-full">

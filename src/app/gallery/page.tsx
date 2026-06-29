@@ -2,21 +2,73 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 
 const images = [
-  { src: "/images/espresso-1.jpg", label: "Espresso Shot" },
-  { src: "/images/pizza.jpg", label: "Wood-Fired Pizza" },
-  { src: "/images/pasta.jpg", label: "Arrabbiata Pasta" },
-  { src: "/images/milkshake.jpg", label: "Chocolate Shake" },
-  { src: "/images/pizza.jpg", label: "Garlic Bread" },
-  { src: "/images/salad.jpg", label: "Fresh Salads" },
-  { src: "/images/dessert.jpg", label: "Dessert Specials" },
-  { src: "/images/fries.jpg", label: "Peri Peri Fries" },
-  { src: "/images/burger.jpg", label: "Cheese Cigars" },
-  { src: "/images/barista.jpg", label: "Barista at Work" },
-  { src: "/images/noodles.jpg", label: "Hakka Noodles" },
-  { src: "/images/cafe-interior.jpg", label: "Cafe Interior" },
+  { src: "/images/espresso-1.jpg", label: "Espresso Shot", w: 2, h: 3 },
+  { src: "/images/pizza.jpg", label: "Wood-Fired Pizza", w: 800, h: 967 },
+  { src: "/images/pasta.jpg", label: "Arrabbiata Pasta", w: 1, h: 1 },
+  { src: "/images/milkshake.jpg", label: "Chocolate Shake", w: 2, h: 3 },
+  { src: "/images/pizza.jpg", label: "Garlic Bread", w: 800, h: 967 },
+  { src: "/images/salad.jpg", label: "Fresh Salads", w: 3, h: 2 },
+  { src: "/images/dessert.jpg", label: "Dessert Specials", w: 4, h: 3 },
+  { src: "/images/fries.jpg", label: "Peri Peri Fries", w: 2, h: 3 },
+  { src: "/images/burger.jpg", label: "Cheese Cigars", w: 800, h: 665 },
+  { src: "/images/barista.jpg", label: "Barista at Work", w: 2, h: 3 },
+  { src: "/images/noodles.jpg", label: "Hakka Noodles", w: 1, h: 1 },
+  { src: "/images/cafe-interior.jpg", label: "Cafe Interior", w: 3, h: 2 },
 ];
+
+function GalleryImage({
+  src,
+  label,
+  w,
+  h,
+  prefersReduced,
+  delay,
+}: {
+  src: string;
+  label: string;
+  w: number;
+  h: number;
+  prefersReduced: boolean | null;
+  delay: number;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <motion.div
+      initial={prefersReduced ? {} : { opacity: 0, scale: 0.9 }}
+      whileInView={prefersReduced ? {} : { opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay }}
+      whileHover={prefersReduced ? {} : { scale: 1.02 }}
+      className="group relative bg-charcoal border border-amber/10 rounded-2xl overflow-hidden break-inside-avoid transition-all duration-500 hover:border-amber/30 hover:shadow-[0_0_30px_-5px_rgba(232,160,69,0.25)]"
+    >
+      <div className="relative" style={{ aspectRatio: `${w}/${h}` }}>
+        {failed ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-espresso to-charcoal">
+            <span className="font-heading text-2xl text-amber/40">{label}</span>
+          </div>
+        ) : (
+          <Image
+            src={src}
+            alt={label}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            onError={() => setFailed(true)}
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+          <span className="font-heading text-sm font-semibold text-cream">
+            {label}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function GalleryPage() {
   const prefersReduced = useReducedMotion();
@@ -41,31 +93,15 @@ export default function GalleryPage() {
 
         <div className="columns-2 sm:columns-3 lg:columns-4 gap-3 sm:gap-4 space-y-3 sm:space-y-4">
           {images.map((img, i) => (
-            <motion.div
-              key={img.label}
-              initial={prefersReduced ? {} : { opacity: 0, scale: 0.9 }}
-              whileInView={prefersReduced ? {} : { opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              whileHover={prefersReduced ? {} : { scale: 1.02 }}
-              className="group relative bg-charcoal border border-amber/10 rounded-2xl overflow-hidden break-inside-avoid transition-all duration-500 hover:border-amber/30 hover:shadow-[0_0_30px_-5px_rgba(232,160,69,0.25)]"
-            >
-              <div className="relative">
-                <Image
-                  src={img.src}
-                  alt={img.label}
-                  width={600}
-                  height={800}
-                  className="w-full h-auto object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
-                  <span className="font-heading text-sm font-semibold text-cream">
-                    {img.label}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
+            <GalleryImage
+              key={`${img.label}-${i}`}
+              src={img.src}
+              label={img.label}
+              w={img.w}
+              h={img.h}
+              prefersReduced={prefersReduced}
+              delay={i * 0.05}
+            />
           ))}
         </div>
 

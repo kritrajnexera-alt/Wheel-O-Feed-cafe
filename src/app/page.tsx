@@ -3,7 +3,89 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import Marquee from "@/components/Marquee";
+
+function HighlightCard({
+  image,
+  title,
+  desc,
+  prefersReduced,
+  index,
+}: {
+  image: string;
+  title: string;
+  desc: string;
+  prefersReduced: boolean | null;
+  index: number;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <motion.div
+      initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
+      whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      whileHover={prefersReduced ? {} : { y: -4, transition: { duration: 0.3 } }}
+      className="group bg-charcoal border border-amber/10 rounded-2xl overflow-hidden transition-all duration-500 hover:border-amber/30 hover:shadow-[0_0_40px_-8px_rgba(232,160,69,0.25)]"
+    >
+      <div className="relative h-48 sm:h-52 overflow-hidden bg-espresso">
+        {failed ? (
+          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-espresso to-charcoal">
+            <span className="font-heading text-4xl text-amber/30">🍽️</span>
+          </div>
+        ) : (
+          <>
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              sizes="(max-width: 768px) 100vw, 33vw"
+              onError={() => setFailed(true)}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
+          </>
+        )}
+      </div>
+      <div className="p-8">
+        <h3 className="font-heading text-xl font-bold text-cream mb-3">
+          {title}
+        </h3>
+        <p className="font-body text-cream/50 leading-relaxed overflow-wrap-break">
+          {desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+function SafeInstaImage({
+  src,
+  alt,
+  sizes,
+}: {
+  src: string;
+  alt: string;
+  sizes: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  return failed ? (
+    <div className="absolute inset-0 bg-gradient-to-br from-espresso to-charcoal flex items-center justify-center">
+      <span className="font-heading text-5xl text-amber/20">📸</span>
+    </div>
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover"
+      sizes={sizes}
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 const highlights = [
   {
@@ -97,37 +179,14 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {highlights.map((item, i) => (
-              <motion.div
+              <HighlightCard
                 key={item.title}
-                initial={prefersReduced ? {} : { opacity: 0, y: 30 }}
-                whileInView={prefersReduced ? {} : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                whileHover={prefersReduced ? {} : {
-                  y: -4,
-                  transition: { duration: 0.3 },
-                }}
-                className="group bg-charcoal border border-amber/10 rounded-2xl overflow-hidden transition-all duration-500 hover:border-amber/30 hover:shadow-[0_0_40px_-8px_rgba(232,160,69,0.25)]"
-              >
-                <div className="relative h-48 sm:h-52 overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/20 to-transparent" />
-                </div>
-                <div className="p-8">
-                  <h3 className="font-heading text-xl font-bold text-cream mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="font-body text-cream/50 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.div>
+                image={item.image}
+                title={item.title}
+                desc={item.desc}
+                prefersReduced={prefersReduced}
+                index={i}
+              />
             ))}
           </div>
         </div>
@@ -141,13 +200,11 @@ export default function Home() {
               whileInView={prefersReduced ? {} : { opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative h-64 sm:h-80 rounded-2xl overflow-hidden"
+              className="relative h-64 sm:h-80 rounded-2xl overflow-hidden bg-espresso"
             >
-              <Image
+              <SafeInstaImage
                 src="/images/barista.jpg"
                 alt="Barista making coffee at Wheel O Feed"
-                fill
-                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent" />

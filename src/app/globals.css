@@ -47,6 +47,7 @@ body {
 
 .text-balance { text-wrap: balance; }
 .text-pretty { text-wrap: pretty; }
+.overflow-wrap-break { overflow-wrap: break-word; word-break: break-word; }
 
 ::-webkit-scrollbar {
   width: 8px;
