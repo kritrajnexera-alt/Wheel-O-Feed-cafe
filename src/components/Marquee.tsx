@@ -4,14 +4,13 @@ export default function Marquee() {
     "PASTA",
     "ESPRESSO",
     "SHAKES",
-    "CHINESE",
-    "ITALIAN",
     "GIDC ANKLESHWAR",
     "EAT TREAT REPEAT",
+    "#1 CAFE",
   ];
 
   return (
-    <div className="relative overflow-hidden bg-charcoal/80 border-y border-amber/10 py-4">
+    <div className="relative overflow-hidden bg-amber py-4">
       <div className="flex whitespace-nowrap animate-marquee">
         {[...Array(2)].map((_, groupIdx) => (
           <span
@@ -21,7 +20,7 @@ export default function Marquee() {
             {items.map((item, i) => (
               <span
                 key={`${groupIdx}-${i}`}
-                className="font-heading text-sm sm:text-base font-bold tracking-[0.2em] text-amber/60 uppercase"
+                className="font-heading text-sm sm:text-base font-bold tracking-[0.2em] text-espresso uppercase"
               >
                 <span className="mx-3">✦</span>
                 {item}

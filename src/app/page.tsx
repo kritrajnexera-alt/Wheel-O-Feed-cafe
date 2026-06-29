@@ -197,57 +197,115 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative min-h-dvh flex items-start sm:items-center justify-center pt-28 sm:pt-20">
-        <div className="absolute inset-0 pointer-events-none overflow-x-hidden" aria-hidden="true">
+      <section className="relative min-h-dvh flex flex-col items-center justify-center pt-28 sm:pt-0 overflow-hidden">
+        {/* Background image with dark overlay */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/images/food-spread.jpg"
+            alt=""
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+
+        {/* Floating amber decorative dots */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div className="absolute top-[15%] left-[10%] w-32 h-32 bg-amber/10 rounded-full blur-3xl" />
+          <div className="absolute top-[60%] right-[8%] w-48 h-48 bg-amber/8 rounded-full blur-3xl" />
+          <div className="absolute bottom-[20%] left-[40%] w-24 h-24 bg-amber/10 rounded-full blur-2xl" />
+          <div className="absolute top-[30%] right-[35%] w-16 h-16 bg-amber/15 rounded-full blur-xl" />
+        </div>
+
+        {/* Existing steam effects */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-steam" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-amber/5 rounded-full blur-3xl animate-steam-delayed" />
           <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-amber/5 rounded-full blur-3xl animate-steam-slower" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber/3 rounded-full blur-[100px] animate-steam-glow" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={
-              prefersReduced
-                ? {}
-                : { opacity: 0, y: 40, filter: "blur(8px)" }
-            }
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            transition={{ duration: 1, ease: easeSpring }}
-          >
-            <div className="inline-flex items-center gap-2 bg-amber/10 border border-amber/20 rounded-full px-5 py-2 mb-8">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="#E8A045"
+        <div className="relative w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 lg:gap-16">
+            {/* Left side — 60% text content */}
+            <div className="w-full md:w-[60%] text-center md:text-left">
+              <motion.div
+                initial={
+                  prefersReduced
+                    ? {}
+                    : { opacity: 0, y: 40, filter: "blur(8px)" }
+                }
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 1, ease: easeSpring }}
               >
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-              </svg>
-              <span className="font-body text-sm font-medium text-amber whitespace-nowrap">
-                4.5 · 259 Reviews · #1 Cafe in Ankleshwar
-              </span>
+                {/* Thin amber line above rating */}
+                <div className="w-16 h-0.5 bg-amber/60 rounded-full mx-auto md:mx-0 mb-6" />
+
+                <div className="inline-flex items-center gap-2 bg-amber/10 border border-amber/20 rounded-full px-5 py-2 mb-8">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="#E8A045"
+                  >
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                  <span className="font-body text-sm font-medium text-amber">
+                    4.5 · 259 Reviews · #1 Cafe in Ankleshwar
+                  </span>
+                </div>
+
+                <h1 className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream leading-[1.1] tracking-tight text-balance max-w-full">
+                  EAT
+                  <span className="text-amber mx-2 sm:mx-4">·</span>
+                  TREAT
+                  <span className="text-amber mx-2 sm:mx-4">·</span>
+                  REPEAT
+                </h1>
+
+                <p className="mt-6 font-body text-lg sm:text-xl text-cream/60 max-w-xl mx-auto md:mx-0">
+                  Ankleshwar&apos;s #1 Cafe · GIDC · Open 1PM–10:30PM
+                </p>
+
+                <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center md:items-start justify-center md:justify-start gap-4">
+                  <CTAButton href="/menu">Explore Menu</CTAButton>
+                  <CTAButton href="/contact" variant="secondary">
+                    Find Us
+                  </CTAButton>
+                </div>
+              </motion.div>
             </div>
 
-            <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream leading-[0.9] tracking-tight text-balance px-1 sm:px-0">
-              EAT
-              <span className="text-amber mx-2 sm:mx-4">·</span>
-              TREAT
-              <span className="text-amber mx-2 sm:mx-4">·</span>
-              REPEAT
-            </h1>
-
-            <p className="mt-6 font-body text-lg sm:text-xl text-cream/60 max-w-xl mx-auto">
-              Ankleshwar&apos;s #1 Cafe · GIDC · Open 1PM–10:30PM
-            </p>
-
-            <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <CTAButton href="/menu">Explore Menu</CTAButton>
-              <CTAButton href="/contact" variant="secondary">
-                Find Us
-              </CTAButton>
+            {/* Right side — 40% floating coffee image */}
+            <div className="hidden md:flex w-[40%] items-center justify-center">
+              <motion.div
+                initial={
+                  prefersReduced
+                    ? {}
+                    : { opacity: 0, scale: 0.8 }
+                }
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2, delay: 0.3, ease: easeSpring }}
+                className="relative"
+              >
+                {/* Glow behind image */}
+                <div className="absolute -inset-12 bg-amber/15 rounded-full blur-[80px]" />
+                {/* Coffee image */}
+                <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-amber/20 shadow-[0_0_60px_-10px_rgba(232,160,69,0.3)]">
+                  <Image
+                    src="/images/espresso-1.jpg"
+                    alt="Espresso coffee at Wheel O Feed"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 0px, 320px"
+                    priority
+                  />
+                </div>
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-gradient-to-t from-espresso to-transparent" />
