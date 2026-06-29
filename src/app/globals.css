@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-espresso: #1C0F0A;
+  --color-amber: #E8A045;
+  --color-cream: #F5F0EB;
+  --color-charcoal: #1A1A1A;
+  --color-espresso-light: #2C1A12;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+}
+
+body {
+  background-color: var(--color-espresso);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+@keyframes steam {
+  0%, 100% { opacity: 0; transform: translateY(0) scaleX(1); }
+  25% { opacity: 0.4; }
+  50% { opacity: 0.6; transform: translateY(-20px) scaleX(1.1); }
+  75% { opacity: 0.3; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(232, 160, 69, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(232, 160, 69, 0.6); }
+}
+
+.animate-steam { animation: steam 4s ease-in-out infinite; }
+.animate-steam-delayed { animation: steam 4s ease-in-out 1.5s infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+.animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-steam,
+  .animate-steam-delayed,
+  .animate-glow-pulse { animation: none; }
+  .animate-marquee { animation: marquee 60s linear infinite; }
+}
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1C0F0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E8A045;
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(232, 160, 69, 0.3);
+  color: #F5F0EB;
+}
