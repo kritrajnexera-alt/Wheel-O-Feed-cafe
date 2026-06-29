@@ -10,7 +10,8 @@ export default function WhatsApp() {
       href="https://wa.me/917600000000"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className="fixed z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300"
+      style={{ bottom: "max(1.5rem, env(safe-area-inset-bottom, 0px))", right: "max(1.5rem, env(safe-area-inset-right, 0px))" }}
       initial={prefersReduced ? { opacity: 1, scale: 1 } : { scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={prefersReduced ? { duration: 0 } : { delay: 1, type: "spring", stiffness: 260, damping: 20 }}

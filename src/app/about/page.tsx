@@ -131,19 +131,34 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
-                  icon: "🍕",
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A045" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34" />
+                      <polygon points="18 2 22 6 12 16 8 16 8 12 18 2" />
+                    </svg>
+                  ),
                   title: "Multi-Cuisine",
                   desc: "Italian, Chinese, Fast Food & Beverages",
                 },
                 {
-                  icon: "⏰",
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A045" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  ),
                   title: "Open Daily",
                   desc: "1:00 PM – 10:30 PM",
                 },
                 {
-                  icon: "📍",
+                  icon: (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E8A045" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  ),
                   title: "GIDC, Ankleshwar",
-                  desc: "F-7,8, First Floor, Ganesh Plaza",
+                  desc: "F-7,8, First Floor, Ganesh Center Plaza",
                 },
               ].map((item, i) => (
                 <motion.div
@@ -154,7 +169,7 @@ export default function AboutPage() {
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="bg-charcoal border border-amber/10 rounded-xl p-6 text-center hover:border-amber/30 transition-all duration-500"
                 >
-                  <span className="text-3xl mb-3 block">{item.icon}</span>
+                  <span className="mb-4 block">{item.icon}</span>
                   <h4 className="font-heading text-base font-bold text-cream mb-1">
                     {item.title}
                   </h4>

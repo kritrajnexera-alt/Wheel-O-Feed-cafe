@@ -114,8 +114,8 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-steam" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-amber/5 rounded-full blur-3xl animate-steam-delayed" />
-          <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-amber/5 rounded-full blur-3xl animate-steam" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber/3 rounded-full blur-[100px]" />
+          <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-amber/5 rounded-full blur-3xl animate-steam-slower" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber/3 rounded-full blur-[100px] animate-steam-glow" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

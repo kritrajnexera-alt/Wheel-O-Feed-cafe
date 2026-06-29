@@ -100,7 +100,7 @@ export default function Navbar() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden relative w-8 h-8 flex items-center justify-center text-cream"
+            className="md:hidden relative w-11 h-11 flex items-center justify-center text-cream"
             aria-label="Toggle menu"
           >
             <span

@@ -35,6 +35,9 @@ function GalleryImage({
   delay: number;
 }) {
   const [failed, setFailed] = useState(false);
+  const [isTouch] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(hover: none)").matches
+  );
 
   return (
     <motion.div
@@ -60,7 +63,11 @@ function GalleryImage({
             onError={() => setFailed(true)}
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-4">
+        <div
+          className={`absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent flex items-end p-4 transition-opacity duration-500 ${
+            isTouch ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+          }`}
+        >
           <span className="font-heading text-sm font-semibold text-cream">
             {label}
           </span>
