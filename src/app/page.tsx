@@ -197,7 +197,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative min-h-dvh flex items-start sm:items-center justify-center overflow-x-hidden pt-24 sm:pt-20">
+      <section className="relative min-h-dvh flex items-start sm:items-center justify-center overflow-x-hidden pt-28 sm:pt-20">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-steam" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-amber/5 rounded-full blur-3xl animate-steam-delayed" />
@@ -250,7 +250,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-espresso to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 sm:h-32 bg-gradient-to-t from-espresso to-transparent" />
       </section>
 
       <Marquee />

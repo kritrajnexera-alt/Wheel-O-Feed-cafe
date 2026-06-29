@@ -170,6 +170,41 @@ export default function AboutPage() {
               </DoubleBezelCard>
             </motion.div>
 
+            <motion.div
+              initial={
+                prefersReduced
+                  ? {}
+                  : { opacity: 0, y: 20, filter: "blur(4px)" }
+              }
+              whileInView={
+                prefersReduced
+                  ? {}
+                  : { opacity: 1, y: 0, filter: "blur(0px)" }
+              }
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, ease: easeSpring }}
+            >
+              <DoubleBezelCard>
+                <div className="p-6 sm:p-8 text-center">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E8A045" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" className="mx-auto mb-4">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-cream mb-1">
+                    Meet the Proprietor
+                  </h3>
+                  <p className="font-heading text-lg font-semibold text-amber mb-3">
+                    Harsh Patel
+                  </p>
+                  <p className="font-body text-cream/60 max-w-lg mx-auto leading-relaxed">
+                    Passionate about bringing authentic Italian and multi-cuisine
+                    flavors to Ankleshwar. Every dish at Wheel O Feed reflects
+                    the same love and care we&apos;d serve our own family.
+                  </p>
+                </div>
+              </DoubleBezelCard>
+            </motion.div>
+
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
               {[
                 {
