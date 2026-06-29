@@ -197,8 +197,8 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative min-h-dvh flex items-start sm:items-center justify-center overflow-x-hidden pt-28 sm:pt-20">
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <section className="relative min-h-dvh flex items-start sm:items-center justify-center pt-28 sm:pt-20">
+        <div className="absolute inset-0 pointer-events-none overflow-x-hidden" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-steam" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-amber/5 rounded-full blur-3xl animate-steam-delayed" />
           <div className="absolute bottom-1/4 left-1/3 w-48 h-48 bg-amber/5 rounded-full blur-3xl animate-steam-slower" />
@@ -229,7 +229,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream leading-[0.9] tracking-tight text-balance">
+            <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream leading-[0.9] tracking-tight text-balance px-1 sm:px-0">
               EAT
               <span className="text-amber mx-2 sm:mx-4">·</span>
               TREAT
