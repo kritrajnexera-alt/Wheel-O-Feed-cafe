@@ -110,7 +110,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="relative min-h-dvh flex items-center justify-center overflow-hidden pt-16">
+      <section className="relative min-h-dvh flex items-start sm:items-center justify-center overflow-x-hidden pt-20 sm:pt-16">
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber/5 rounded-full blur-3xl animate-steam" />
           <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-amber/5 rounded-full blur-3xl animate-steam-delayed" />
@@ -145,7 +145,7 @@ export default function Home() {
               Ankleshwar&apos;s #1 Cafe · GIDC · Open 1PM–10:30PM
             </p>
 
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="mt-6 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/menu"
                 className="inline-flex items-center gap-2 bg-amber text-espresso font-heading font-semibold px-8 py-3.5 rounded-full hover:bg-amber/90 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg shadow-amber/20"
