@@ -21,10 +21,38 @@ export default function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-espresso/95 backdrop-blur-md border-b border-amber/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
-          <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl sm:text-3xl leading-none group-hover:scale-105 transition-transform duration-300">
-              🍽️
-            </span>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="group-hover:scale-105 transition-transform duration-300 flex-shrink-0"
+            >
+              <path
+                d="M17 8h1a4 4 0 1 1 0 8h-1"
+                stroke="#E8A045"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"
+                stroke="#E8A045"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M6 2v3M10 2v3M14 2v3"
+                stroke="#E8A045"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+              <path
+                d="M7 12h2M11 12h2"
+                stroke="#E8A045"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
             <span className="font-heading text-xl sm:text-2xl font-bold text-cream tracking-tight">
               Wheel<span className="text-amber"> O </span>Feed
             </span>
